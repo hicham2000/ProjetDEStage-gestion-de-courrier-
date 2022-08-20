@@ -13,12 +13,18 @@ class Courrier extends Migration
      */
     public function up()
     {
-        Schema::create('Courrier', function (Blueprint $table) {
+        Schema::create('Courriers', function (Blueprint $table) {
             $table->id();
-            $table->integer('tracking_number');
-            $table->string('ville_depart');
+            $table->string('expediteur');
+            $table->string('destinateur');
+            $table->string('tracking_number');
+            $table->string('ville_depart')->nullable();
             $table->string('ville_arrive');
-            $table->string('state')->default('peading');
+            $table->integer('zone')->nullable();
+            $table->string('adresse');
+            $table->integer('agent');
+            $table->integer('state')->default(1);
+
             $table->timestamps();
         });
     }

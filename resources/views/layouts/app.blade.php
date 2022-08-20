@@ -54,11 +54,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -66,6 +62,57 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if(auth()->user()->is_admin == 1)
+                                        <a class="dropdown-item" href="{{route('admin.create')}}">
+                                            Create User
+                                        </a>
+
+                                            <a class="dropdown-item" href="{{route('dashbord')}}">
+                                                Create Courrier
+                                            </a>
+
+                                        <a class="dropdown-item" href="{{route('show.admin.courrier')}}">
+                                            All Courriers
+                                        </a>
+
+                                        <a class="dropdown-item" href="{{route('user.agent')}}">
+                                            All Agent
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('user.facteur')}}">
+                                            All Postman
+                                        </a>
+
+
+                                    @endif
+
+                                        @if(auth()->user()->is_facteur == 0 && auth()->user()->is_admin == 0)
+                                            <a class="dropdown-item" href="{{route('dashbord')}}">
+                                                Create Courrier
+                                            </a>
+
+                                            <a class="dropdown-item" href="{{route('show.courrier')}}">
+                                                All Courriers
+                                            </a>
+                                            <a class="dropdown-item" href="{{route('courier.traiter')}}">
+                                                Courriers à traiter (sortant)
+                                            </a>
+                                            <a class="dropdown-item" href="{{route('courier.traiter.entrant')}}">
+                                                Courriers à traiter (entrant)
+                                            </a>
+
+                                        @endif
+                                        @if(auth()->user()->is_facteur == 1 )
+                                            <a class="dropdown-item" href="{{route('dashbord')}}">
+                                                Courriers à récupérer
+                                            </a>
+
+                                            <a class="dropdown-item" href="{{route('show.courrier')}}">
+                                                Courriers en encours de livraison
+                                            </a>
+
+
+                                        @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -87,7 +134,6 @@
             @yield('content')
         </main>
     </div>
-
     <script type="text/javascript" src="{{ URL::asset('js/mdb.min.js')}}"></script>
 </body>
 </html>

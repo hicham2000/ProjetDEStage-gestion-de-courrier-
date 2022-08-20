@@ -24,9 +24,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function welcome()
+    {
+        return view('home');
+    }
     public function index()
     {
 $postes = Poste::orderBy('name','ASC')->get();
-        return view('home')->with('postes', $postes);
+        return view('adminCreate')->with('postes', $postes);
     }
 }

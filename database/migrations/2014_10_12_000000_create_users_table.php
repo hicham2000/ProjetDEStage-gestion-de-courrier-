@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('is_admin')->default('0');
             $table->integer('is_facteur')->default('0');
-            $table->string('agence')->nullable();
-            $table->string('zone')->nullable();
+            $table->integer('agence')->nullable();
+            $table->integer('zone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
