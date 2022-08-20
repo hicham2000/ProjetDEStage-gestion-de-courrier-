@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'welcome'])->name('home');
+Route::post('/Search', [App\Http\Controllers\Serche::class, 'index'])->name('Search');
+Route::get('/Courrier/Details/{id}',[\App\Http\Controllers\CourrierController::class,'showDetails'])->name('show.details');
+
+
 
 
 
@@ -52,10 +56,21 @@ Route::get('/AllCourrier',[\App\Http\Controllers\CourrierController::class,'show
 Route::get('/Courrier/delete/{id}',[\App\Http\Controllers\CourrierController::class,'destroy'])->name('courrier.delete');
 Route::get('/Courrier/update/{id}',[\App\Http\Controllers\CourrierController::class,'edit'])->name('courrier.update');
 Route::post('/Courrier/store/{id}',[\App\Http\Controllers\CourrierController::class,'updatecourrier'])->name('courrier.update.store');
-Route::get('/Courrier/Details/{id}',[\App\Http\Controllers\CourrierController::class,'showDetails'])->name('show.details');
+
 Route::get('/Courrier/traiter',[\App\Http\Controllers\TraitementCourrier::class,'index'])->name('courier.traiter');
 Route::get('/Courrier/traiter/sortant/{id}',[\App\Http\Controllers\TraitementCourrier::class,'edit'])->name('courier.traiter.sortant');
 Route::get('/Courrier/traiter/entrant',[\App\Http\Controllers\TraitementCourrier::class,'indexentrant'])->name('courier.traiter.entrant');
 Route::post('/Courrier/traiter/entrant/store/{id}',[\App\Http\Controllers\TraitementCourrier::class,'editentrant'])->name('courier.traiter.entrant.store');
-Route::get('/Courrier/traiter/entrant/store/facteur/{id}',[\App\Http\Controllers\TraitementCourrier::class,'editentrantfacteur'])->name('courier.traiter.entrant.store.facteur');
+
 });
+
+
+Route::group(['middleware' => ['Facteur','auth']],function (){
+Route::get('/Courrier/traiter/facteur',[\App\Http\Controllers\TraitementCourrier::class,'indexfacteur'])->name('courier.traiter.facteur');
+Route::get('/Courrier/traiter/entrant/store/facteur/{id}',[\App\Http\Controllers\TraitementCourrier::class,'editentrantfacteur'])->name('courier.traiter.entrant.store.facteur');
+Route::get('/Courrier/traiter/facteur/EnCoursDeLivraison',[\App\Http\Controllers\TraitementCourrier::class,'EnCoursDeLivraison'])->name('courier.traiter.facteur.EnCoursDeLivraison');
+Route::get('/Courrier/traiter/entrant/store/facteur/EnCoursDeLivraison/{id}',[\App\Http\Controllers\TraitementCourrier::class,'editentrantfacteurEnCoursDeLivraison'])->name('courier.traiter.entrant.store.facteur.EnCoursDeLivraison');
+
+});
+
+

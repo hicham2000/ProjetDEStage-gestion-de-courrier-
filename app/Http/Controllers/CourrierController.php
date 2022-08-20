@@ -131,14 +131,11 @@ class CourrierController extends Controller
 public function showDetails($id){
 
     $iduser = auth()->user()->id;
-    $courrier = Courrier::where('agent',$iduser)->find($id);
+    $courrier = Courrier::find($id);
 
-    if(!$courrier){
-        return redirect()->route('show.courrier');
-    }
-    else{
+
         return view('courrierdetails')->with('courrier',$courrier);
-    }
+
 
 
 }

@@ -43,9 +43,10 @@
             <div class="d-flex flex-column ms-5">
 
                 <h2 class="text-white ms-5 fw-bold">Veuillez entrer vorte Code de Suivi</h2>
-                <form>
+                <form method="post" action="{{route('Search')}}">
                     @csrf
-                    <input id="serche" class="mt-3 mb-5 ms-5 fw-bold w-75" type="text"  placeholder="Tracking Number">
+                    <input id="serche" class="mt-3 mb-3 ms-5 fw-bold w-75" type="text" name="tracking_number"  placeholder="Tracking Number"><br>
+                    <button class="ms-5 mb-3 fw-bold btn btn-success rounded-3" type="submit">Search</button>
 
                 </form>
                 <div class="mt-5 mb-5 ms-5 ">

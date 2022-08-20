@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Courrier
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -102,12 +102,12 @@
 
                                         @endif
                                         @if(auth()->user()->is_facteur == 1 )
-                                            <a class="dropdown-item" href="{{route('dashbord')}}">
+                                            <a class="dropdown-item" href="{{route('courier.traiter.facteur')}}">
                                                 Courriers à récupérer
                                             </a>
 
-                                            <a class="dropdown-item" href="{{route('show.courrier')}}">
-                                                Courriers en encours de livraison
+                                            <a class="dropdown-item" href="{{route('courier.traiter.facteur.EnCoursDeLivraison')}}">
+                                                Courriers en cours de livraison
                                             </a>
 
 

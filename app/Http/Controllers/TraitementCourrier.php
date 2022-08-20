@@ -34,6 +34,26 @@ class TraitementCourrier extends Controller
 
 
     }
+    public function indexfacteur()
+    {
+
+
+        $courriers = Courrier::where('ville_arrive',auth()->user()->agence)->where('zone',auth()->user()->zone)->paginate(5);
+
+        return view('FacteurCourrier')->with('courriers',$courriers);
+
+
+    }
+    public function EnCoursDeLivraison()
+    {
+
+
+        $courriers = Courrier::where('ville_arrive',auth()->user()->agence)->where('zone',auth()->user()->zone)->where('state','>=',4)->paginate(5);
+
+        return view('EnCoursDeLaivrison')->with('courriers',$courriers);
+
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -151,7 +171,33 @@ class TraitementCourrier extends Controller
 
         ]);
 
-        return redirect()->route('courier.traiter.entrant');
+        return redirect()->route('courier.traiter.facteur');
+        //
+    }
+    public function editentrantfacteurEnCoursDeLivraison($id)
+    {
+        $courrier = Courrier::find($id);
+
+        $courrier->state = 5;
+        $courrier->save();
+
+
+        $agence = auth()->user()->agence;
+
+        $poste = Poste::find($agence);
+
+        $statut_text = 'Envoi livré : '. $poste->name;
+
+
+
+        statut::create([
+            'id_courrier'=> $id,
+            'statut_text' => $statut_text,
+            'statut_id' => 5,
+
+        ]);
+
+        return redirect()->route('courier.traiter.facteur.EnCoursDeLivraison');
         //
     }
 
