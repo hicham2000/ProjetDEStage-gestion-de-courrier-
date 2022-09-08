@@ -26,6 +26,11 @@
                             <tbody>
 
 
+                            <div class="d-flex w-100 justify-content-center">
+                                <div class="mb-3">{!! DNS2D::getBarcodeHTML("$courrier->tracking_number", 'QRCODE') !!}</div>
+                            </div>
+
+
 
 
 
